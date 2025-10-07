@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevForge Solutions - Desarrollo Web y Software Personalizado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563EB;
+            --secondary-color: #F59E0B;
+            --success-color: #10B981;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            scroll-behavior: smooth;
+        }
+
+        /* Header y Navegación */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--bg-primary);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 150px 5% 100px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        #hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            background: var(--secondary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow);
+            background: #E68A00;
+        }
+
+        /* Secciones Generales */
+        section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        section.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Beneficios */
+        #beneficios {
+            background: var(--bg-secondary);
+        }
+
+        .beneficios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .beneficio {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .beneficio:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .beneficio i {
+            font-size: 3rem;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonios */
+        #testimonios {
+            background: var(--bg-primary);
+        }
+
+        .testimonios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonio {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .testimonio:hover {
+            transform: scale(1.02);
+        }
+
+        .testimonio p {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .testimonio cite {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Formulario de Contacto */
+        #contacto {
+            background: var(--bg-secondary);
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        input,
+        textarea {
+            padding: 1rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button[type="submit"] {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        button[type="submit"]:hover {
+            background: #1D4ED8;
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                /* Simplificado; en producción, usa menú hamburguesa */
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 60px 3%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">Dev Solutions</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <h1>Transforma Tu Negocio con Desarrollo Web y Software de Vanguardia</h1>
+        <p>En Dev Solutions, creamos soluciones personalizadas que impulsan el crecimiento de tu empresa. Desde sitios
+            web responsive hasta apps innovadoras, estamos listos para elevar tu presencia digital.</p>
+        <a href="#contacto" class="cta-button">¡Empieza Tu Proyecto Hoy!</a>
+    </section>
+
+    <section id="beneficios">
+        <h2>Beneficios de Nuestro Servicio</h2>
+        <div class="beneficios-grid">
+            <div class="beneficio">
+                <i class="fas fa-rocket"></i>
+                <h3>Desarrollo Rápido y Eficiente</h3>
+                <p>Entregamos proyectos en tiempo récord sin comprometer la calidad, usando las últimas tecnologías como
+                    React y Node.js.</p>
+            </div>
+            <div class="beneficio">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Seguridad y Escalabilidad</h3>
+                <p>Tus soluciones están protegidas con encriptación avanzada y diseñadas para crecer con tu negocio.</p>
+            </div>
+            <div class="beneficio">
+                <i class="fas fa-chart-line"></i>
+                <h3>Resultados Medibles</h3>
+                <p>Aumenta tu ROI con analíticas integradas y optimizaciones SEO que impulsan el tráfico y las
+                    conversiones.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonios">
+        <h2>Lo Que Dicen Nuestros Clientes</h2>
+        <div class="testimonios-grid">
+            <div class="testimonio">
+                <p>"Dev transformó nuestra idea en una app exitosa en solo 3 meses. ¡Altamente recomendados!"</p>
+                <cite>- -</cite>
+            </div>
+            <div class="testimonio">
+                <p>"El equipo es profesional y atento. Nuestro sitio web ahora genera leads constantes."</p>
+                <cite>- -</cite>
+            </div>
+            <div class="testimonio">
+                <p>"Soluciones personalizadas que superaron nuestras expectativas. Valor por dinero inigualable."</p>
+                <cite>- -</cite>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2>Contáctanos para Tu Proyecto Personalizado</h2>
+        <form id="contactForm">
+            <input type="text" placeholder="Tu Nombre" required>
+            <input type="email" placeholder="Tu Email" required>
+            <input type="text" placeholder="Asunto" required>
+            <textarea placeholder="Describe tu proyecto..." required></textarea>
+            <button type="submit">Enviar Mensaje</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Dev Solutions. Todos los derechos reservados. | <a href="#hero" style="color: #A5B4FC;">Volver al
+                inicio</a></p>
+    </footer>
+
+    <script>
+        // Scroll suave para enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animaciones en scroll (fade-in para secciones)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Formulario simulado
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('¡Gracias! Tu mensaje ha sido enviado. Te contactaremos pronto.');
+            this.reset();
+        });
+
+        // Efecto en header al scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--bg-primary)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
